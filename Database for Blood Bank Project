@@ -1,0 +1,86 @@
+1. Query for Creation of the database: 
+   CREATE DATABASE bloodbankdb;
+
+2. Query for using blood bank database:
+   USE bloodbankdb;
+
+3. Query for creation of the Donor table:
+CREATE TABLE donors (
+    donor_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10),
+    blood_group VARCHAR(5),
+    city VARCHAR(50),
+    phone VARCHAR(15)
+);
+
+4. Query for creation of the Blood Stock table:
+CREATE TABLE blood_stock (
+    blood_group VARCHAR(5) PRIMARY KEY,
+    units INT
+);
+
+5. Query for inserting data into donor table:
+INSERT INTO donors (name, age, gender, blood_group, city, phone) VALUES
+('Rohan',25,'Male','A+','Delhi','9876543210'),
+('Priya',30,'Female','O+','Mumbai','9876501234'),
+('Amit',28,'Male','B+','Pune','9123456780'),
+('Neha',22,'Female','AB+','Kolkata','9898989898'),
+('Suresh',35,'Male','O-','Delhi','9988776655'),
+('Meena',27,'Female','A-','Chennai','9090909090'),
+('Vikram',32,'Male','B-','Bangalore','9234567890'),
+('Kavita',26,'Female','O+','Hyderabad','9000000001'),
+('Rajat',24,'Male','A+','Delhi','9876523456'),
+('Anita',29,'Female','AB-','Pune','9001234567'),
+
+('Arjun',31,'Male','B+','Mumbai','9555555555'),
+('Pooja',23,'Female','O-','Indore','9666666666'),
+('Karan',34,'Male','A+','Chandigarh','9777777777'),
+('Aisha',21,'Female','AB+','Lucknow','9888888888'),
+('Rohit',37,'Male','O+','Delhi','9999999999'),
+('Simran',28,'Female','A-','Amritsar','9345678901'),
+('Kabir',33,'Male','B-','Bhopal','9456789012'),
+
+
+('Sonia',26,'Female','O+','Jaipur','9567890123'),
+('Harsh',29,'Male','A+','Nagpur','9678901234'),
+('Renu',25,'Female','AB-','Goa','9789012345'),
+
+('Ajay',24,'Male','B+','Delhi','9890123456'),
+('Isha',27,'Female','O+','Pune','9001112222'),
+('Nitin',30,'Male','A-','Kanpur','9002223333'),
+('Tina',22,'Female','O-','Gurgaon','9003334444'),
+('Varun',35,'Male','AB+','Surat','9004445555'),
+('Maya',31,'Female','B+','Delhi','9005556666'),
+('Sameer',28,'Male','O+','Mumbai','9006667777'),
+('Riya',23,'Female','A+','Pune','9007778888'),
+('Gaurav',29,'Male','B-','Kolkata','9008889999'),
+('Sneha',26,'Female','O+','Hyderabad','9009990000'),
+
+('Dev',32,'Male','A+','Delhi','9111111111'),
+('Anushka',30,'Female','AB+','Chennai','9222222222'),
+('Laksh',27,'Male','B+','Pune','9333333333'),
+('Rekha',25,'Female','O-','Kolkata','9444444444'),
+('Tarun',34,'Male','A-','Jaipur','9555555556'),
+('Dimple',28,'Female','B+','Indore','9666666667'),
+('Hemant',33,'Male','O+','Surat','9777777778'),
+('Pinky',24,'Female','AB-','Lucknow','9888888889'),
+('Yash',29,'Male','A+','Delhi','9999999990'),
+('Jaya',26,'Female','B-','Bangalore','9000000002'),
+
+('Ramesh',36,'Male','O+','Mumbai','9876543222'),
+('Divya',27,'Female','A+','Pune','9876501222'),
+('Shyam',29,'Male','B+','Chennai','9123456777'),
+('Naina',23,'Female','AB+','Delhi','9898989888'),
+('Sunny',38,'Male','O-','Goa','9988776622'),
+('Jyoti',27,'Female','A-','Bhopal','9090909088'),
+('Imran',32,'Male','B-','Hyderabad','9234567888'),
+('Madhu',26,'Female','O+','Surat','9000000003'),
+('Deepak',25,'Male','A+','Delhi','9876523466'),
+('Geeta',29,'Female','AB-','Kolkata','9001234577');
+
+6. Query for inserting data into donor table:
+INSERT INTO blood_stock VALUES
+('A+', 20), ('A-', 15), ('B+', 18), ('B-', 10),
+('AB+', 12), ('AB-', 8), ('O+', 25), ('O-', 10);
