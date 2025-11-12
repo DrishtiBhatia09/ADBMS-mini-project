@@ -1,0 +1,104 @@
+import mysql.connector
+
+def get_conn():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Drishti@09",
+        database="bloodbankdb"
+    )
+
+
+def search_donor(blood_group):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM donors WHERE blood_group = %s", (blood_group,))
+    donors = cur.fetchall()
+    conn.close()
+    return donors
+
+
+def check_stock(blood_group):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("SELECT units FROM blood_stock WHERE blood_group = %s", (blood_group,))
+    row = cur.fetchone()
+    conn.close()
+    return row[0] if row else 0
+
+
+def take_blood(blood_group, units):
+    available = check_stock(blood_group)
+
+    if units > available:
+        print("\nNot sufficient units in Blood Bank!")
+        print(f"Available Units: {available}")
+        return False
+
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("UPDATE blood_stock SET units = units - %s WHERE blood_group = %s",
+                (units, blood_group))
+    conn.commit()
+    conn.close()
+    remaining = available - units
+    print("\nBlood issued successfully!")
+    print(f"Remaining Units of {blood_group}: {remaining}")
+    return True
+
+
+def submit_blood(blood_group, units):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("UPDATE blood_stock SET units = units + %s WHERE blood_group = %s",
+                (units, blood_group))
+    conn.commit()
+    conn.close()
+    print("\nBlood submitted successfully!")
+    print(f"Updated Units of {blood_group}: {check_stock(blood_group)}")
+
+
+def main():
+    while True:
+        print("\n=== BLOOD BANK MANAGEMENT SYSTEM (MySQL) ===")
+        print("1. Search Donor")
+        print("2. Check Blood Availability")
+        print("3. Take Blood (Issue)")
+        print("4. Submit Blood")
+        print("5. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            bg = input("Enter Blood Group: ").upper()
+            donors = search_donor(bg)
+            if donors:
+                print("\n-- Donors Found --")
+                for d in donors:
+                    print(d)
+            else:
+                print("\nNo donors found for this blood group!")
+
+        elif choice == "2":
+            bg = input("Enter Blood Group: ").upper()
+            print(f"Available Units of {bg}: {check_stock(bg)}")
+
+        elif choice == "3":
+            bg = input("Enter Blood Group: ").upper()
+            units = int(input("Enter units to issue: "))
+            take_blood(bg, units)
+
+        elif choice == "4":
+            bg = input("Enter Blood Group: ").upper()
+            units = int(input("Enter units to submit: "))
+            submit_blood(bg, units)
+
+        elif choice == "5":
+            print("Exiting system...")
+            break
+
+        else:
+            print("Invalid choice! Try again.")
+
+
+main()
